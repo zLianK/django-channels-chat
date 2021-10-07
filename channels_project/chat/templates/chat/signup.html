@@ -1,0 +1,51 @@
+{% extends "chat/layout.html" %}
+
+{% block title %}Sign Up | Chat{% endblock %}
+
+{% block body %}
+<div class="login-signup-section" id="signup-section">
+    <section class="login-signup-content">
+        <h2 class="login-signup-title">Sign up to Chat</h2>
+
+        <form method="GET" class="login-signup-form">
+            {% csrf_token %}
+            <div class="form-group horizontal-form-group">
+                <div class="form-item horizontal-form-item">
+                    <label class="form-label" for="signup-name">Name</label>
+                    <input name="name" id="signup-name" type="text" class="form-control">
+                </div>
+                <div class="form-item horizontal-form-item">
+                    <label class="form-label" for="signup-username">Username</label>
+                    <input name="username" id="signup-username" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-item">
+                    <label class="form-label" for="signup-email">Email</label>
+                    <input name="email" id="signup-email" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-item">
+                    <label class="form-label" for="signup-password">Password</label>
+                    <input name="password" id="signup-password" type="password" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-item">
+                    <label class="form-label" for="signup-confirmation">Password Confirmation</label>
+                    <input name="confirmation" id="signup-confirmation" type="password" class="form-control">
+                </div>
+            </div>
+            <button class="login-signup-btn btn btn-primary" type="submit">Create Account</button>
+        </form>
+        <p class="login-signup-message">
+            Already have an account?
+            <a href="{% url 'login' %}" class="login-signup-link">Log In here.</a>
+        </p>
+    </section>
+</div>
+
+{% endblock %}
+
+{% block script %}{% endblock %}
