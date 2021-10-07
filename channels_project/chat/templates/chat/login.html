@@ -3,11 +3,12 @@
 {% block title %}Log In | Chat{% endblock %}
 
 {% block body %}
+{{error}}
 <div class="login-signup-section" id="login-section">
     <section class="login-signup-content">
         <h2 class="login-signup-title">Log in to Chat</h2>
 
-        <form method="GET" class="login-signup-form">
+        <form method="POST" class="login-signup-form">
             {% csrf_token %}
             <div class="form-group">
                 <div class="form-item">
