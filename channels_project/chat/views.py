@@ -36,24 +36,38 @@ class SignUpView(TemplateView):
         password = data['password']
         confirmation = data['confirmation']
 
+        context = {}
+        context['content'] = {
+            'name': name,
+            'username': username,
+            'email': email,
+        }
+
         # Error checking
+        error = []
+
         input_name = ['Name', 'Username', 'Email',
                       'Password', 'Password Confirmation']
         input_content = [name, username, email, password, confirmation]
 
         for i in range(len(input_content)):
             if input_content[i] == '':
-                error = f"{input_name[i]} can't be blank."
-                return render(request, self.template_name, {'error': error})
+                error.append(f"{input_name[i]} can't be blank.")
 
-        if len(password) > 8:
-            return render(request, self.template_name, {'error': 'Password must have 8+ characters.'})
+        if len(password) < 8:
+            error.append('Password must have 8+ characters.')
 
         if password != confirmation:
-            return render(request, self.template_name, {'error': 'Passwords must match.'})
+            error.append('Passwords must match.')
 
-        if email.find('@') == -1:
-            return render(request, self.template_name, {'error': 'Email not valid.'})
+        if email.find('@') == -1 and email != '':
+            error.append('Email not valid.')
+
+        if len(error) > 0:
+
+            context['error'] = error
+
+            return render(request, self.template_name, context)
 
         # Attempt to create new user
         try:
@@ -82,14 +96,24 @@ class LogInView(TemplateView):
         username = data['username']
         password = data['password']
 
+        context = {}
+        context['content'] = {
+            'username': username,
+        }
+
         # Error checking
+        error = []
+
         input_name = ['Username', 'Password']
         input_content = [username, password]
 
         for i in range(len(input_content)):
             if input_content[i] == '':
-                error = f"{input_name[i]} can't be blank."
-                return render(request, self.template_name, {'error': error})
+                error.append(f"{input_name[i]} can't be blank.")
+
+        if len(error) > 0:
+            context['error'] = error
+            return render(request, self.template_name, context)
 
         # Attempt to authenticate user
         user = authenticate(request, username=username, password=password)
@@ -97,7 +121,9 @@ class LogInView(TemplateView):
             login(request, user)
             return HttpResponseRedirect(reverse('index'))
         else:
-            return render(request, self.template_name, {'error': 'Invalid username and/or password.'})
+            error.append('Invalid username and/or password.')
+            context['error'] = error
+            return render(request, self.template_name, context)
 
 
 def logout_view(request):

@@ -3,23 +3,35 @@
 {% block title %}Log In | Chat{% endblock %}
 
 {% block body %}
-{{error}}
 <div class="login-signup-section" id="login-section">
+    <div class="ball ball-1"></div>
+    <div class="ball ball-2"></div>
     <section class="login-signup-content">
-        <h2 class="login-signup-title">Log in to Chat</h2>
-
+        <h2 class="login-signup-title">
+            Log in to
+            <a class="login-signup-chat-link" href="{% url 'landing' %}">Chat</a>
+        </h2>
+        <div class="signup-login-error">
+            <ul class="signup-login-error-list">
+                {% for item in error %}
+                <li class="signup-login-error-message">{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
         <form method="POST" class="login-signup-form">
             {% csrf_token %}
             <div class="form-group">
                 <div class="form-item">
                     <label class="form-label" for="login-username">Username</label>
-                    <input name="username" id="login-username" type="text" class="form-control">
+                    <input name="username" id="login-username" type="text" class="form-control login-signup-input"
+                        autocomplete="off" value="{{ content.username }}">
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-item">
                     <label class="form-label" for="login-password">Password</label>
-                    <input name="password" id="login-password" type="password" class="form-control">
+                    <input name="password" id="login-password" type="password" class="form-control login-signup-input"
+                        autocomplete="off">
                 </div>
             </div>
             <button class="login-signup-btn btn btn-primary" type="submit">Log In</button>
