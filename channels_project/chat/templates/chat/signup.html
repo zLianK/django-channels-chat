@@ -1,21 +1,22 @@
 {% extends "chat/layout.html" %}
+{% load static %}
 
 {% block title %}Sign Up | Chat{% endblock %}
 
 {% block body %}
+<img class="login-signup-bg" src="{% static 'chat/login-signup-bg.png' %}" alt="">
 <div class="login-signup-section" id="signup-section">
+
     <section class="login-signup-content">
-        <div class="ball ball-1"></div>
-        <div class="ball ball-2"></div>
         <h2 class="login-signup-title">
             Sign up to
             <a class="login-signup-chat-link" href="{% url 'landing' %}">Chat</a>
         </h2>
         {% if error %}
-        <div class="signup-login-error">
-            <ul class="signup-login-error-list">
+        <div class="login-signup-error">
+            <ul class="login-signup-error-list">
                 {% for item in error %}
-                <li class="signup-login-error-message">{{ item }}</li>
+                <li class="login-signup-error-message">{{ item }}</li>
                 {% endfor %}
             </ul>
         </div>

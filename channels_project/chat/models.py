@@ -1,3 +1,47 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.deletion import CASCADE, DO_NOTHING
 
-# Create your models here.
+
+class Friend(models.Model):
+    STATUS_CHOICES = (
+        ('s', 'sended'),
+        ('a', 'accepted'),
+        ('d', 'declined'),
+        ('r', 'removed'),
+    )
+
+    current_user = models.ForeignKey(
+        User, on_delete=CASCADE, related_name='user_friend')
+    user_id = models.ForeignKey(
+        User, on_delete=DO_NOTHING, related_name='friend')
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(
+        User, on_delete=DO_NOTHING, related_name='sender')
+    recipient = models.ForeignKey(
+        User, on_delete=DO_NOTHING, related_name='recipient')
+    content = models.CharField(max_length=1000)
+    datetime = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField()
+
+
+class Favorite(models.Model):
+    current_user = models.ForeignKey(
+        User, on_delete=CASCADE, related_name='user_favorite')
+    user_id = models.ForeignKey(
+        User, on_delete=DO_NOTHING, related_name='favorited')
+
+
+class Archive(models.Model):
+    current_user = models.ForeignKey(
+        User, on_delete=CASCADE, related_name='user_archive')
+    user_id = models.ForeignKey(
+        User, on_delete=DO_NOTHING, related_name='achieved')
+
+
+class Like(models.Model):
+    message_id = models.ForeignKey(Message, on_delete=DO_NOTHING)
+    current_user = models.ForeignKey(User, on_delete=DO_NOTHING)

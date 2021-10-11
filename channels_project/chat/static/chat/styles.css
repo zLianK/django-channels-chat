@@ -2,19 +2,18 @@
 /* fonts */
 /* colors */    
 /* box-shadow */
-h1, h2 {
-  color: #054161;
-  font-family: "PT Sans Narrow", sans-serif;
-  font-weight: 700;
-}
-
-/* signup and login */
 html, body {
   height: 100%;
 }
 
 body {
   background-color: #f6fcff;
+  width: 100%;
+}
+
+/* signup and login */
+.login-signup-bg {
+  position: absolute;
 }
 
 .login-signup-section {
@@ -33,6 +32,12 @@ body {
   border-radius: 1em;
   width: 510px;
   background-color: white;
+}
+
+.login-signup-title {
+  color: #054161;
+  font-family: "PT Sans Narrow", sans-serif;
+  font-weight: 700;
 }
 
 .login-signup-chat-link {
@@ -117,37 +122,14 @@ body {
   box-shadow: 0px 0px 0px 5px #DDF0FA;
 }
 
-.signup-login-error-list {
+.login-signup-error-list {
   margin: 0;
   padding: 0;
   list-style-position: inside;
 }
-.signup-login-error-list li {
+.login-signup-error-list li {
   color: #B55E5B;
   font-family: "Ubuntu", sans-serif;
-}
-
-.ball {
-  position: absolute;
-  background-color: #054161;
-  border-radius: 50%;
-}
-
-.ball-1 {
-  width: 500px;
-  height: 500px;
-  top: 15%;
-  left: 27%;
-  z-index: -1;
-}
-
-.ball-2 {
-  background-color: #008cff;
-  width: 350px;
-  height: 350px;
-  bottom: 23%;
-  right: 30%;
-  z-index: -1;
 }
 
 /*# sourceMappingURL=styles.css.map */

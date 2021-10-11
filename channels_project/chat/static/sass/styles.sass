@@ -1,15 +1,14 @@
 @use 'abstracts/variables' as *
 
-h1, h2
-    color: $clr-primary-dark
-    font-family: $font-title
-    font-weight: 700
-
-/* signup and login */
 html, body
     height: 100%
 body
     background-color: $clr-primary-ultra-light
+    width: 100%
+
+/* signup and login */
+.login-signup-bg
+    position: absolute
 
 .login-signup-section
     position: relative
@@ -26,6 +25,11 @@ body
     border-radius: 1em
     width: 510px
     background-color: $clr-white
+
+.login-signup-title
+    color: $clr-primary-dark
+    font-family: $font-title
+    font-weight: 700
 
 .login-signup-chat-link
     text-decoration: none
@@ -102,7 +106,7 @@ body
             outline: none
             box-shadow: $box-shadow-input
 
-.signup-login-error-list
+.login-signup-error-list
     margin: 0
     padding: 0
     list-style-position: inside
@@ -110,23 +114,3 @@ body
     li
         color: $clr-accent-dark
         font-family: $font-text
-
-.ball
-    position: absolute
-    background-color: $clr-primary-dark
-    border-radius: 50%
-
-.ball-1
-    width: 500px
-    height: 500px
-    top: 15%
-    left: 27%
-    z-index: -1
-
-.ball-2
-    background-color: $clr-primary
-    width: 350px
-    height: 350px
-    bottom: 23%
-    right: 30%
-    z-index: -1
