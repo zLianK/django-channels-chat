@@ -1,9 +1,10 @@
 {% extends "chat/layout.html" %}
 
-{% block title %}TESTE{% endblock %}
+{% block title %}Home{% endblock %}
+
+{% block navbar %}{% include "chat/navbar.html" %}{% endblock %}
 
 {% block body %}
-<a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
 {% endblock %}
 
 {% block script %}{% endblock %}

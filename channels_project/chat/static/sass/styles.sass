@@ -114,3 +114,144 @@ body
     li
         color: $clr-accent-dark
         font-family: $font-text
+
+/* chat navbar */
+.chat-navbar
+    display: flex
+    align-items: center
+    justify-content: center
+    column-gap: 5em
+    background-color: $clr-primary-dark
+    border-bottom: 1em solid $clr-primary-light
+
+.search-form
+    display: flex
+    align-items: center
+
+.nav-information
+    display: flex
+    align-items: center
+
+.chat-navbar-logo
+    font-family: $font-title
+    font-weight: 700
+    font-size: 2.2em
+    margin: 10px
+
+    a
+        text-decoration: none
+        color: $clr-primary-light
+        transition: all 100ms ease-in
+        padding: 0 5px
+
+        &:hover, &:focus
+            color: $clr-accent-light
+            box-shadow: none
+            border: none
+            outline: none
+
+#search-input
+    background-color: $clr-primary-light
+    border-radius: 5px 0 0 5px
+    border: none
+    width: 300px
+    font-family: $font-text
+    transition: all 100ms ease-in
+
+    &:hover, &:focus
+        background-color: $clr-white
+        box-shadow: none
+
+.search-btn
+    background-color: $clr-primary
+    border-radius: 0 5px 5px 0
+    border: none
+
+    &:hover, &:focus
+        box-shadow: none
+        background-color: $clr-accent-light
+        color: $clr-black
+
+.nav-current-user
+    margin: 0
+    padding: 6px 12px
+    color: $clr-white
+    background-color: $clr-accent-dark
+    border-radius: 5px 0 0 5px
+    font-family: $font-text
+    cursor: default
+
+.logout-btn
+    background-color: $clr-primary
+    border: none
+    border-radius: 0 5px 5px 0
+    font-family: $font-text
+
+    &:hover, &:focus
+        box-shadow: none
+        background-color: $clr-accent-light
+        color: $clr-black
+
+/* landing */
+
+.landing-section
+    background-color: $clr-primary-dark
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+
+.landing-content
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.landing-auth
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.landing-title
+    color: $clr-white
+    text-transform: uppercase
+    font-family: $font-title
+    font-weight: 700
+    font-size: 5em
+
+.landing-login-btn
+    background-color: $clr-primary
+    color: $clr-primary-light
+    font-family: $font-text
+    font-weight: 700
+    font-size: 1.3em
+    padding: 5px 20px
+    border-radius: 100px
+    transition: all 100ms ease-in
+    border: none
+    margin-bottom: 1em
+
+    &:hover, &:focus, &:focus-visible
+        background-color: $clr-accent
+
+    &:focus
+        box-shadow: $box-shadow-input
+
+.landing-signup-paragraph
+    color: $clr-primary-light
+    font-family: $font-text
+
+    a
+        color: $clr-accent-light
+        text-decoration: none
+        font-family: $font-text
+        transition: margin-left 100ms ease-in-out
+
+        &:hover
+            margin-left: 5px
+
+        &:focus-visible
+            padding: 3px
+            margin-left: 5px
+            border-radius: 4px
+            outline: none
+            box-shadow: $box-shadow-input

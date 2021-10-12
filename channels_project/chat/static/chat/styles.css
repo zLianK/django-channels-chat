@@ -132,4 +132,158 @@ body {
   font-family: "Ubuntu", sans-serif;
 }
 
+/* chat navbar */
+.chat-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5em;
+  background-color: #054161;
+  border-bottom: 1em solid #DDF0FA;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.nav-information {
+  display: flex;
+  align-items: center;
+}
+
+.chat-navbar-logo {
+  font-family: "PT Sans Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 2.2em;
+  margin: 10px;
+}
+.chat-navbar-logo a {
+  text-decoration: none;
+  color: #DDF0FA;
+  transition: all 100ms ease-in;
+  padding: 0 5px;
+}
+.chat-navbar-logo a:hover, .chat-navbar-logo a:focus {
+  color: #EBB6B5;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+#search-input {
+  background-color: #DDF0FA;
+  border-radius: 5px 0 0 5px;
+  border: none;
+  width: 300px;
+  font-family: "Ubuntu", sans-serif;
+  transition: all 100ms ease-in;
+}
+#search-input:hover, #search-input:focus {
+  background-color: white;
+  box-shadow: none;
+}
+
+.search-btn {
+  background-color: #008cff;
+  border-radius: 0 5px 5px 0;
+  border: none;
+}
+.search-btn:hover, .search-btn:focus {
+  box-shadow: none;
+  background-color: #EBB6B5;
+  color: black;
+}
+
+.nav-current-user {
+  margin: 0;
+  padding: 6px 12px;
+  color: white;
+  background-color: #B55E5B;
+  border-radius: 5px 0 0 5px;
+  font-family: "Ubuntu", sans-serif;
+  cursor: default;
+}
+
+.logout-btn {
+  background-color: #008cff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  font-family: "Ubuntu", sans-serif;
+}
+.logout-btn:hover, .logout-btn:focus {
+  box-shadow: none;
+  background-color: #EBB6B5;
+  color: black;
+}
+
+/* landing */
+.landing-section {
+  background-color: #054161;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-title {
+  color: white;
+  text-transform: uppercase;
+  font-family: "PT Sans Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 5em;
+}
+
+.landing-login-btn {
+  background-color: #008cff;
+  color: #DDF0FA;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-size: 1.3em;
+  padding: 5px 20px;
+  border-radius: 100px;
+  transition: all 100ms ease-in;
+  border: none;
+  margin-bottom: 1em;
+}
+.landing-login-btn:hover, .landing-login-btn:focus, .landing-login-btn:focus-visible {
+  background-color: #ED9390;
+}
+.landing-login-btn:focus {
+  box-shadow: 0px 0px 0px 5px #DDF0FA;
+}
+
+.landing-signup-paragraph {
+  color: #DDF0FA;
+  font-family: "Ubuntu", sans-serif;
+}
+.landing-signup-paragraph a {
+  color: #EBB6B5;
+  text-decoration: none;
+  font-family: "Ubuntu", sans-serif;
+  transition: margin-left 100ms ease-in-out;
+}
+.landing-signup-paragraph a:hover {
+  margin-left: 5px;
+}
+.landing-signup-paragraph a:focus-visible {
+  padding: 3px;
+  margin-left: 5px;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: 0px 0px 0px 5px #DDF0FA;
+}
+
 /*# sourceMappingURL=styles.css.map */

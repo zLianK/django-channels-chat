@@ -12,10 +12,11 @@
         integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'chat/styles.css' %}">
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %} | Chat</title>
 </head>
 
 <body>
+    {% block navbar %}{% endblock %}
     {% block body %}{% endblock %}
 
     {% block script %}{% endblock %}

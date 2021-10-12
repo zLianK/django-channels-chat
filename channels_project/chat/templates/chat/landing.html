@@ -1,9 +1,22 @@
 {% extends "chat/layout.html" %}
+{% load static %}
 
-{% block title %}TESTE{% endblock %}
+{% block title %}Catch up with Chat{% endblock %}
 
 {% block body %}
-<h1>TESTE</h1>
+<div class="landing-section">
+    <section class="landing-content">
+        <h1 class="landing-title">Just <span class="landing-chat">Chat!</span></h1>
+        <div class="landing-auth">
+            <a href="{% url 'login' %}" class="btn btn-primary landing-login-btn">Log In to Chat</a>
+            <p class="landing-signup-paragraph">
+                Don't have an account?
+                <a href="{% url 'signup' %}" class="landing-signup-link">Sing up here.</a>
+            </p>
+        </div>
+    </section>
+</div>
+
 {% endblock %}
 
 {% block script %}{% endblock %}
