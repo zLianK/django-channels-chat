@@ -1,16 +1,17 @@
+{% load static %}
 <nav class="chat-navbar">
     <h1 class="chat-navbar-logo"><a class="logo-link" href="{% url 'index' %}">Chat</a></h1>
     <div class="search">
-        <form class="search-form">
+        <form action="{% url 'search' %}" method="GET" class="search-form">
             {% csrf_token %}
             <div class="form-group">
                 <div class="form-item">
                     <label for="search-input" hidden>Search username</label>
-                    <input class="form-control" id="search-input" type="text" placeholder="Search username"
-                        autocomplete="off">
+                    <input name="search" class="form-control" id="search-input" type="text"
+                        placeholder="Search username" autocomplete="off">
                 </div>
             </div>
-            <button class="search-btn btn btn-primary" type="submit">?</button>
+            <button class="search-btn btn btn-primary" type="submit" id="search-btn" disabled>?</button>
         </form>
     </div>
     <div class="nav-information">

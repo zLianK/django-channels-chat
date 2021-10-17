@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.utils.decorators import method_decorator
 
-from .decorators import unauthenticated_user_only, authenticated_user_only
+from .decorators import chat_group, unauthenticated_user_only, authenticated_user_only
 
 
 @method_decorator(authenticated_user_only, name='dispatch')
@@ -15,8 +15,22 @@ class IndexView(TemplateView):
     template_name = 'chat/index.html'
 
 
+@method_decorator(unauthenticated_user_only, name='dispatch')
 class LandingView(TemplateView):
     template_name = 'chat/landing.html'
+
+
+@method_decorator(chat_group, name='dispatch')
+class ChatView(TemplateView):
+    template_name = 'chat/chat.html'
+
+    def get(self, request, first_user, second_user):
+        return render(request, self.template_name)
+
+
+@method_decorator(authenticated_user_only, name='dispatch')
+class SearchView(TemplateView):
+    template_name = 'chat/search.html'
 
 
 @method_decorator(unauthenticated_user_only, name='dispatch')

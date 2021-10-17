@@ -11,6 +11,18 @@ body {
   width: 100%;
 }
 
+.main-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-title {
+  font-family: "PT Sans Narrow", sans-serif;
+  font-weight: 700;
+  color: #008cff;
+}
+
 /* signup and login */
 .login-signup-bg {
   position: absolute;
@@ -191,15 +203,20 @@ body {
 }
 .search-btn:hover, .search-btn:focus {
   box-shadow: none;
+  outline: none;
   background-color: #EBB6B5;
   color: black;
+}
+.search-btn:disabled {
+  background-color: #008cff;
+  opacity: 1;
 }
 
 .nav-current-user {
   margin: 0;
   padding: 6px 12px;
-  color: white;
-  background-color: #B55E5B;
+  color: #054161;
+  background-color: #DDF0FA;
   border-radius: 5px 0 0 5px;
   font-family: "Ubuntu", sans-serif;
   cursor: default;
@@ -284,6 +301,49 @@ body {
   border-radius: 4px;
   outline: none;
   box-shadow: 0px 0px 0px 5px #DDF0FA;
+}
+
+/* search page */
+#search-content {
+  width: 500px;
+  margin-top: 3em;
+}
+
+.searching-for {
+  color: #B55E5B;
+}
+
+#search-users {
+  margin-top: 1.7em;
+}
+
+.search-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 4px solid #DDF0FA;
+}
+
+.search-username, .search-user-btn {
+  margin: 20px 10px;
+}
+
+.search-username {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  color: #054161;
+}
+
+.search-user-btn {
+  background-color: #DDF0FA;
+  border: none;
+  color: black;
+}
+.search-user-btn:hover {
+  background-color: #EBB6B5;
+  color: black;
 }
 
 /*# sourceMappingURL=styles.css.map */

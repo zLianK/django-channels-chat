@@ -18,6 +18,22 @@ class Friend(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
 
+class Chat(models.Model):
+    STATUS_CHOICES = (
+        ('e', 'enabled'),
+        ('d', 'disabled'),
+    )
+
+    user_1 = models.ForeignKey(
+        User, on_delete=DO_NOTHING, related_name='user_1')
+    status_user_1 = models.CharField(
+        max_length=1, choices=STATUS_CHOICES, default='e')
+    user_2 = models.ForeignKey(
+        User, on_delete=DO_NOTHING, related_name='user_2')
+    status_user_2 = models.CharField(
+        max_length=1, choices=STATUS_CHOICES, default='e')
+
+
 class Message(models.Model):
     sender = models.ForeignKey(
         User, on_delete=DO_NOTHING, related_name='sender')

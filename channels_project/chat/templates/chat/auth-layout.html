@@ -20,8 +20,6 @@
     {% block body %}{% endblock %}
 
     {% block script %}{% endblock %}
-    <script src={% static 'chat/navbar.js' %}></script>
-    {{ user.id|json_script:"user_id" }}
 </body>
 
 </html>
