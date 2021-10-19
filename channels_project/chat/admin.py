@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Friend, Message, Favorite, Archive, Like
+from .models import Friend, Message, Favorite, Archive, Like, ChatGroup
 
 
 class FriendAdmin(admin.ModelAdmin):
@@ -25,8 +25,13 @@ class LikeAdmin(admin.ModelAdmin):
     list_display = ['id', 'message_id', 'current_user']
 
 
+class ChatGroupAdmin(admin.ModelAdmin):
+    list_display = ['id']
+
+
 admin.site.register(Friend, FriendAdmin)
 admin.site.register(Message, MessageAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
 admin.site.register(Archive, ArchiveAdmin)
 admin.site.register(Like, LikeAdmin)
+admin.site.register(ChatGroup, ChatGroupAdmin)

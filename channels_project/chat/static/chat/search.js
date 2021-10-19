@@ -41,15 +41,27 @@ async function dynamicSearchingResults() {
     });
 }
 
-function redirectToChat(recipientUserId, currentUserId) {
+async function redirectToChat(recipientUserId, currentUserId) {
 
     if (currentUserId > parseInt(recipientUserId)) {
         var chatGroup = [recipientUserId, currentUserId];
     } else if (currentUserId < parseInt(recipientUserId)) {
         var chatGroup = [currentUserId, recipientUserId];
     }
-    console.log(chatGroup)
-    window.location = `http://127.0.0.1:8000/chat/${chatGroup[0]}/${chatGroup[1]}`;
+
+    const createGroupResponse = await fetch(`http://127.0.0.1:8000/api/create-group`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({
+            first_user: chatGroup[0],
+            second_user: chatGroup[1],
+        }),
+    });
+
+    window.location = `http://127.0.0.1:8000/home`;
 }
 
 function getSearchParams(searchParamName) {
@@ -58,4 +70,19 @@ function getSearchParams(searchParamName) {
     const searchTerm = url.searchParams.get(searchParamName);
 
     return searchTerm;
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

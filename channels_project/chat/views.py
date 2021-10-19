@@ -20,14 +20,6 @@ class LandingView(TemplateView):
     template_name = 'chat/landing.html'
 
 
-@method_decorator(chat_group, name='dispatch')
-class ChatView(TemplateView):
-    template_name = 'chat/chat.html'
-
-    def get(self, request, first_user, second_user):
-        return render(request, self.template_name)
-
-
 @method_decorator(authenticated_user_only, name='dispatch')
 class SearchView(TemplateView):
     template_name = 'chat/search.html'
