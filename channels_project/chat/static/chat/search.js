@@ -1,22 +1,52 @@
 document.addEventListener('DOMContentLoaded', function () {
-    dynamicSearchingResults()
+    const searchSection = document.getElementById('search-content');
+    searchSection.style.display = 'none';
+
+    const searchButton = document.getElementById('search-btn');
+    searchButton.addEventListener('click', () => dynamicSearchingResults());
+
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', () => disableEnableSearchButton());
+
+    // Prevent the form from submitting
+    const searchForm = document.getElementById('search-form');
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const searchButton = document.getElementById('search-btn');
+        searchButton.disabled = true;
+    });
 });
 
 async function dynamicSearchingResults() {
-    const searchTerm = getSearchParams('search');
 
+    const indexSection = document.getElementById('index-content');
+    indexSection.style.display = 'none';
+
+    const searchSection = document.getElementById('search-content');
+    searchSection.style.display = 'block';
+
+    // Clean the search-users div
+    document.getElementById('search-users').innerHTML = '';
+
+    // Get the search term
+    const searchInput = document.getElementById('search-input');
+    const searchTerm = searchInput.value;
+
+    // Get the users with the search term
     const usersResponse = await fetch(`http://127.0.0.1:8000/api/search?search=${searchTerm}`);
     const usersJson = await usersResponse.json();
 
+    // Change the title depending on the search term
     const searchTitle = document.getElementById('search-title');
     searchTitle.innerHTML = `Searching for: <span class="searching-for">${usersJson.searching_for}</span>`;
 
+    // For each user that contains the search term, create a component
     const users = usersJson.users;
-
     const searchUsersDiv = document.getElementById('search-users');
     users.forEach(element => {
-        const currentUserId = parseInt(JSON.parse(document.getElementById('user_id').textContent));
 
+        // If user id is equal to current user id, do nothing
+        const currentUserId = parseInt(JSON.parse(document.getElementById('user_id').textContent));
         if (currentUserId == parseInt(element.id)) {
             return;
         }
@@ -33,35 +63,14 @@ async function dynamicSearchingResults() {
         const userButton = document.createElement('button');
         userButton.innerHTML = 'Message';
         userButton.setAttribute('id', `search-user-btn-${element.id}`);
-        userButton.setAttribute('class', 'search-user-btn btn btn-primary');
-        userButton.addEventListener('click', () => redirectToChat(element.id, currentUserId));
+        userButton.setAttribute('class', 'search-user-btn btn');
+        userButton.addEventListener('click', () => redirectToChat(element.username));
 
         userDiv.append(userParagraph, userButton);
         searchUsersDiv.append(userDiv);
     });
-}
 
-async function redirectToChat(recipientUserId, currentUserId) {
-
-    if (currentUserId > parseInt(recipientUserId)) {
-        var chatGroup = [recipientUserId, currentUserId];
-    } else if (currentUserId < parseInt(recipientUserId)) {
-        var chatGroup = [currentUserId, recipientUserId];
-    }
-
-    const createGroupResponse = await fetch(`http://127.0.0.1:8000/api/create-group`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken'),
-        },
-        body: JSON.stringify({
-            first_user: chatGroup[0],
-            second_user: chatGroup[1],
-        }),
-    });
-
-    window.location = `http://127.0.0.1:8000/home`;
+    searchInput.value = '';
 }
 
 function getSearchParams(searchParamName) {
@@ -70,6 +79,10 @@ function getSearchParams(searchParamName) {
     const searchTerm = url.searchParams.get(searchParamName);
 
     return searchTerm;
+}
+
+function redirectToChat(username) {
+    window.open(`http://127.0.0.1:8000/chat/${username}`, '_blank');
 }
 
 function getCookie(name) {
@@ -85,4 +98,15 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function disableEnableSearchButton() {
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-btn');
+
+    if (searchInput.value != '') {
+        searchButton.removeAttribute('disabled');
+    } else {
+        searchButton.disabled = true;
+    }
 }

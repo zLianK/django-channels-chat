@@ -2,8 +2,7 @@
 <nav class="chat-navbar">
     <h1 class="chat-navbar-logo"><a class="logo-link" href="{% url 'index' %}">Chat</a></h1>
     <div class="search">
-        <form action="{% url 'search' %}" method="GET" class="search-form">
-            {% csrf_token %}
+        <form class="search-form" id="search-form">
             <div class="form-group">
                 <div class="form-item">
                     <label for="search-input" hidden>Search username</label>

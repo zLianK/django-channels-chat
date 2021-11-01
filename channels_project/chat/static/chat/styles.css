@@ -345,5 +345,8 @@ body {
   background-color: #EBB6B5;
   color: black;
 }
+.search-user-btn:focus {
+  outline: none;
+}
 
 /*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,17 @@
+{% extends "chat/layout.html" %}
+{% load static %}
+
+{% block title %}{{ username }}{% endblock %}
+
+
+{% block body %}
+<div class="main-section">
+    <section id="chat-content">
+        <h2 class="section-title" id="chat-title">{{ username }}</h2>
+    </section>
+</div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

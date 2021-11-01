@@ -28,12 +28,12 @@ class ChatGroup(models.Model):
         User, on_delete=DO_NOTHING, related_name='user_1')
     status_user_1 = models.CharField(
         max_length=1, choices=STATUS_CHOICES, default='d')
-    last_change_1 = models.DateTimeField(blank=True, null=True)
+
     user_2 = models.ForeignKey(
         User, on_delete=DO_NOTHING, related_name='user_2')
     status_user_2 = models.CharField(
         max_length=1, choices=STATUS_CHOICES, default='d')
-    last_change_2 = models.DateTimeField(blank=True, null=True)
+
     last_change = models.DateTimeField(auto_now_add=True)
 
 

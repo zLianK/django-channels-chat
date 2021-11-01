@@ -20,8 +20,10 @@
     {% block body %}{% endblock %}
 
     {% block script %}{% endblock %}
-    <script src={% static 'chat/navbar.js' %}></script>
+
+    {% if user.is_authenticated %}
     {{ user.id|json_script:"user_id" }}
+    {% endif %}
 </body>
 
 </html>
