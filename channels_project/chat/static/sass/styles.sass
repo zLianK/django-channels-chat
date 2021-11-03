@@ -307,5 +307,91 @@ body
         background-color: $clr-accent-light
         color: $clr-black
 
-    &:focus
+    &:focus, &:focus-visible
         outline: none
+        box-shadow: none
+
+/* chat */
+.chat-section
+    position: relative
+    background-color: $clr-primary-dark
+    width: 100vw
+    height: 100vh
+
+#chat-content
+    background-color: $clr-accent-light
+    box-shadow: $box-shadow-card
+    border-radius: 20px
+    padding: 20px
+    width: 50%
+    height: 85%
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translateX(-50%) translateY(-50%)
+
+.chat-area
+    height: 95%
+
+#chat-title
+    color: $clr-primary-dark
+
+.messages-area
+    height: 90%
+    border-radius: 20px
+    padding: 20px
+    margin-bottom: 20px
+    background-color: $clr-primary-ultra-light
+
+#chat-form
+    display: flex
+    width: 100%
+
+.form-group-chat, .form-item-chat
+    width: 100%
+
+#chat-input
+    font-family: $font-text
+    border-radius: 5px 0 0 5px
+    border: none
+
+    &:focus, &:focus-visible
+        box-shadow: none
+        border: none
+
+.chat-btn
+    background-color: $clr-primary-dark
+    font-family: $font-text
+    border: none
+    border-radius: 0 5px 5px 0
+
+    &:hover
+        background-color: $clr-primary
+
+    &:disabled
+        background-color: $clr-primary-dark
+        color: $clr-white
+        opacity: 100
+        cursor: not-allowed
+        pointer-events: auto
+
+.message-container
+    display: flex
+
+.current-user-container
+    flex-direction: row-reverse
+
+.message-chat
+    padding: 10px
+    font-family: $font-text
+    font-size: 1.2em
+
+.current-user-chat
+    border-radius: 100px 100px 0 100px
+    background-color: $clr-primary-dark
+    color: $clr-primary-ultra-light
+
+.recipient-chat
+    border-radius: 100px 100px 100px 0
+    background-color: $clr-accent-light
+    color: $clr-primary-dark

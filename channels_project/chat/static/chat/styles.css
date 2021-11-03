@@ -345,8 +345,108 @@ body {
   background-color: #EBB6B5;
   color: black;
 }
-.search-user-btn:focus {
+.search-user-btn:focus, .search-user-btn:focus-visible {
   outline: none;
+  box-shadow: none;
+}
+
+/* chat */
+.chat-section {
+  position: relative;
+  background-color: #054161;
+  width: 100vw;
+  height: 100vh;
+}
+
+#chat-content {
+  background-color: #EBB6B5;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  border-radius: 20px;
+  padding: 20px;
+  width: 50%;
+  height: 85%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.chat-area {
+  height: 95%;
+}
+
+#chat-title {
+  color: #054161;
+}
+
+.messages-area {
+  height: 90%;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f6fcff;
+}
+
+#chat-form {
+  display: flex;
+  width: 100%;
+}
+
+.form-group-chat, .form-item-chat {
+  width: 100%;
+}
+
+#chat-input {
+  font-family: "Ubuntu", sans-serif;
+  border-radius: 5px 0 0 5px;
+  border: none;
+}
+#chat-input:focus, #chat-input:focus-visible {
+  box-shadow: none;
+  border: none;
+}
+
+.chat-btn {
+  background-color: #054161;
+  font-family: "Ubuntu", sans-serif;
+  border: none;
+  border-radius: 0 5px 5px 0;
+}
+.chat-btn:hover {
+  background-color: #008cff;
+}
+.chat-btn:disabled {
+  background-color: #054161;
+  color: white;
+  opacity: 100;
+  cursor: not-allowed;
+  pointer-events: auto;
+}
+
+.message-container {
+  display: flex;
+}
+
+.current-user-container {
+  flex-direction: row-reverse;
+}
+
+.message-chat {
+  padding: 10px;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.2em;
+}
+
+.current-user-chat {
+  border-radius: 100px 100px 0 100px;
+  background-color: #054161;
+  color: #f6fcff;
+}
+
+.recipient-chat {
+  border-radius: 100px 100px 100px 0;
+  background-color: #EBB6B5;
+  color: #054161;
 }
 
 /*# sourceMappingURL=styles.css.map */

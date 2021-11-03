@@ -5,9 +5,29 @@
 
 
 {% block body %}
-<div class="main-section">
+<div class="chat-section">
     <section id="chat-content">
         <h2 class="section-title" id="chat-title">{{ username }}</h2>
+        <div class="chat-area">
+            <div class="messages-area">
+                <div class="message-container current-user-container">
+                    <p class="current-user-chat message-chat">current user</p>
+                </div>
+                <div class="message-container recipient-user-container">
+                    <p class="recipient-chat message-chat">recipient user</p>
+                </div>
+            </div>
+            <form id="chat-form">
+                <div class="form-group form-group-chat">
+                    <div class="form-item form-item-chat">
+                        <label for="chat-input" hidden>Chat input</label>
+                        <input name="chat" class="form-control" id="chat-input" type="text" placeholder="Aa"
+                            autocomplete="off">
+                    </div>
+                </div>
+                <button class="chat-btn btn btn-primary" type="submit" id="chat-btn" disabled>Send</button>
+            </form>
+        </div>
     </section>
 </div>
 {% endblock %}
