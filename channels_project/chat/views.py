@@ -20,7 +20,13 @@ class ChatView(TemplateView):
     template_name = 'chat/chat.html'
 
     def get(self, request, username):
-        return render(request, self.template_name, {'username': username})
+
+        try:
+            recipient = User.objects.get(username=username)
+        except:
+            return HttpResponseRedirect(reverse('index'))
+
+        return render(request, self.template_name, {'recipient': recipient})
 
 
 @method_decorator(unauthenticated_user_only, name='dispatch')

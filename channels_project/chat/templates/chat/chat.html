@@ -1,15 +1,15 @@
 {% extends "chat/layout.html" %}
 {% load static %}
 
-{% block title %}{{ username }}{% endblock %}
+{% block title %}{{ recipient.username }}{% endblock %}
 
 
 {% block body %}
 <div class="chat-section">
     <section id="chat-content">
-        <h2 class="section-title" id="chat-title">{{ username }}</h2>
+        <h2 class="section-title" id="chat-title">{{ recipient.username }}</h2>
         <div class="chat-area">
-            <div class="messages-area">
+            <div class="messages-area" id='message-area'>
                 <div class="message-container current-user-container">
                     <p class="current-user-chat message-chat">current user</p>
                 </div>
@@ -33,5 +33,6 @@
 {% endblock %}
 
 {% block script %}
-
+<script src={% static 'chat/chat.js' %}></script>
+{{ recipient.id|json_script:"recipient_id" }}
 {% endblock %}
