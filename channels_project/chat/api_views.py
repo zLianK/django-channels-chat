@@ -2,16 +2,17 @@ from django.utils.timezone import now
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
-from .permissions import IsInGroup
-from .models import ChatGroup
 from rest_framework import permissions
+from .serializers import UserSerializer
+from .permissions import IsInGroup, IsSenderTheCurrentUser
+from .models import ChatGroup, Message
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 
 class SearchList(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         queryset = {}
@@ -34,3 +35,20 @@ class SearchList(APIView):
         queryset['users'] = serializer.data
 
         return Response(queryset)
+
+
+class PostMessage(APIView):
+    permission_classes = [IsAuthenticated, IsSenderTheCurrentUser]
+
+    def post(self, request):
+        data = request.data
+
+        content = data['content']
+        sender = User.objects.get(id=data['sender'])
+        recipient = User.objects.get(id=data['recipient'])
+
+        message = Message(content=content, sender=sender,
+                          recipient=recipient, status=True)
+        message.save()
+
+        return Response({'message': 'Successfully sent.'})
