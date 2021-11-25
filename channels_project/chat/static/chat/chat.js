@@ -2,17 +2,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const chatInput = document.getElementById('chat-input');
     chatInput.addEventListener('input', () => disableEnableSendButton());
 
+    preventFormFromSubmitting();
     getAllMessages();
     startWebSocket();
 
-    // Prevent the form from submitting
+})
+
+function preventFormFromSubmitting() {
     const chatForm = document.getElementById('chat-form');
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const chatButton = document.getElementById('chat-btn');
         chatButton.disabled = true;
     });
-})
+}
 
 function disableEnableSendButton() {
     const chatInput = document.getElementById('chat-input');
@@ -25,17 +28,60 @@ function disableEnableSendButton() {
     }
 }
 
-function getAllMessages() {
-    console.log('GET ALL MESSAGES');
+async function getAllMessages() {
+    const users = getUsersSorted();
+
+    const messagesResponse = await fetch(`http://127.0.0.1:8000/api/messages?first_user=${users[0]}&second_user=${users[1]}`);
+    const messagesJson = await messagesResponse.json();
+
+    const messages = messagesJson.messages;
+    printAllMessages(messages);
+    updateScroll();
+}
+
+function printAllMessages(messages) {
+
+    const currentUserId = getCurrentUserId();
+
+    const messageArea = document.getElementById('message-area');
+
+    messages.forEach(element => {
+        console.log(element.content)
+
+        var messageContainer = document.createElement('div');
+        var messageParagraph = document.createElement('p');
+
+        if (element.sender == currentUserId) {
+            messageContainer = createCurrentUserMessageContainer(messageContainer, messageParagraph, element.content);
+        } else {
+            messageContainer = createRecipientUserMessageContainer(messageContainer, messageParagraph, element.content);
+        }
+
+        messageArea.append(messageContainer);
+
+    });
+}
+
+function getUsersSorted() {
+    const currentUserId = getCurrentUserId();
+    const recipientId = getRecipientUserId();
+
+    return [currentUserId, recipientId].sort();
+}
+
+function getCurrentUserId() {
+    return parseInt(JSON.parse(document.getElementById('user_id').textContent));
+}
+
+function getRecipientUserId() {
+    return parseInt(JSON.parse(document.getElementById('recipient_id').textContent));
 }
 
 function startWebSocket() {
 
-    const currentUserId = parseInt(JSON.parse(document.getElementById('user_id').textContent));
-    const recipientId = parseInt(JSON.parse(document.getElementById('recipient_id').textContent));
-
-
-    const users = [currentUserId, recipientId].sort();
+    const currentUserId = getCurrentUserId();
+    const recipientId = getRecipientUserId();
+    const users = getUsersSorted();
 
     const chatSocket = new WebSocket(
         'ws://'
@@ -56,12 +102,14 @@ function startWebSocket() {
         var messageParagraph = document.createElement('p');
 
         if (data.sender == currentUserId) {
-            messageContainer = createCurrentUserMessageContainer(messageContainer, messageParagraph, data);
+            messageContainer = createCurrentUserMessageContainer(messageContainer, messageParagraph, data.message);
         } else {
-            messageContainer = createRecipientUserMessageContainer(messageContainer, messageParagraph, data);
+            messageContainer = createRecipientUserMessageContainer(messageContainer, messageParagraph, data.message);
         }
 
         messageArea.append(messageContainer);
+
+        updateScroll();
 
     };
 
@@ -83,19 +131,19 @@ function startWebSocket() {
     };
 }
 
-function createCurrentUserMessageContainer(container, paragraph, data) {
+function createCurrentUserMessageContainer(container, paragraph, content) {
     container.setAttribute('class', 'message-container current-user-container');
     paragraph.setAttribute('class', 'current-user-chat message-chat');
-    paragraph.innerHTML = `${data.message}`;
+    paragraph.innerHTML = `${content}`;
     container.append(paragraph);
 
     return container;
 }
 
-function createRecipientUserMessageContainer(container, paragraph, data) {
+function createRecipientUserMessageContainer(container, paragraph, content) {
     container.setAttribute('class', 'message-container recipient-user-container');
     paragraph.setAttribute('class', 'recipient-chat message-chat');
-    paragraph.innerHTML = `${data.message}`;
+    paragraph.innerHTML = `${content}`;
     container.append(paragraph);
 
     return container;
@@ -131,4 +179,9 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+function updateScroll() {
+    var element = document.getElementById('message-area');
+    element.scrollTop = element.scrollHeight - element.clientHeight;
 }

@@ -1,11 +1,9 @@
-from django.utils.timezone import now
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from rest_framework import permissions
-from .serializers import UserSerializer
+from .serializers import UserSerializer, MessageSerializer
 from .permissions import IsInGroup, IsSenderTheCurrentUser
-from .models import ChatGroup, Message
+from .models import Message
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -52,3 +50,27 @@ class PostMessage(APIView):
         message.save()
 
         return Response({'message': 'Successfully sent.'})
+
+
+class GetMessages(APIView):
+    permission_classes = [IsAuthenticated, IsInGroup]
+
+    def get(self, request):
+        data = request.query_params
+
+        first_user = int(data.get('first_user'))
+        second_user = int(data.get('second_user'))
+
+        users = [first_user, second_user]
+
+        queryset = {}
+
+        messages = Message.objects.filter(
+            sender__in=users, recipient__in=users).order_by('id')
+
+        serializer = MessageSerializer(messages, many=True)
+
+        queryset['users'] = users
+        queryset['messages'] = serializer.data
+
+        return Response(queryset)

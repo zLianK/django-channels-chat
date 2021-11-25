@@ -385,6 +385,7 @@ body {
   padding: 20px;
   margin-bottom: 20px;
   background-color: #f6fcff;
+  overflow: auto;
 }
 
 #chat-form {
