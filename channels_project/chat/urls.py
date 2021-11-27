@@ -15,4 +15,6 @@ urlpatterns = [
     path('api/search', api_views.SearchList.as_view(), name='api-search'),
     path('api/send-message', api_views.PostMessage.as_view(), name='api-send'),
     path('api/messages', api_views.GetMessages.as_view(), name='api-messages'),
+    path('api/update-group', api_views.UpdateGroup.as_view(),
+         name='api-update-group'),
 ]

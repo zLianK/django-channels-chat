@@ -46,7 +46,6 @@ function printAllMessages(messages) {
     const messageArea = document.getElementById('message-area');
 
     messages.forEach(element => {
-        console.log(element.content)
 
         var messageContainer = document.createElement('div');
         var messageParagraph = document.createElement('p');
@@ -162,6 +161,26 @@ function saveMessage(message, currentUser, recipientUser) {
             content: message,
             sender: currentUser,
             recipient: recipientUser
+        })
+    });
+
+    updateGroup();
+}
+
+function updateGroup() {
+    const csrftoken = getCookie('csrftoken');
+
+    users = getUsersSorted();
+
+    fetch('http://127.0.0.1:8000/api/update-group', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify({
+            first_user: users[0],
+            second_user: users[1]
         })
     });
 }

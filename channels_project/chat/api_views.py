@@ -3,10 +3,11 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, MessageSerializer
 from .permissions import IsInGroup, IsSenderTheCurrentUser
-from .models import Message
+from .models import ChatGroup, Message
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.utils.timezone import now
 
 
 class SearchList(APIView):
@@ -74,3 +75,32 @@ class GetMessages(APIView):
         queryset['messages'] = serializer.data
 
         return Response(queryset)
+
+
+class UpdateGroup(APIView):
+    permission_classes = [IsAuthenticated, IsInGroup]
+
+    def post(self, request):
+
+        data = request.data
+        first_user = data['first_user']
+        second_user = data['second_user']
+
+        datetime = now()
+
+        try:
+            group = ChatGroup.objects.get(
+                user_1=first_user, user_2=second_user)
+            group.last_change = datetime
+        except:
+            group = ChatGroup(
+                user_1=first_user,
+                status_user_1='e',
+                user_2=second_user,
+                status_user_2='e',
+                last_change=datetime
+            )
+
+        group.save()
+
+        return Response({'message': 'Successfully updated'})
