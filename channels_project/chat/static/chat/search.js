@@ -8,14 +8,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('search-input');
     searchInput.addEventListener('input', () => disableEnableSearchButton());
 
-    // Prevent the form from submitting
+    displayGroups();
+    preventFormFromSubmitting();
+
+});
+
+function preventFormFromSubmitting() {
     const searchForm = document.getElementById('search-form');
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const searchButton = document.getElementById('search-btn');
         searchButton.disabled = true;
     });
-});
+}
 
 async function dynamicSearchingResults() {
 
@@ -51,26 +56,45 @@ async function dynamicSearchingResults() {
             return;
         }
 
-        const userDiv = document.createElement('div');
-        userDiv.setAttribute('class', 'search-user');
-        userDiv.setAttribute('id', `search-user-${element.id}`)
-
-        const userParagraph = document.createElement('p');
-        userParagraph.innerHTML = element.username;
-        userParagraph.setAttribute('class', 'search-username');
-        userParagraph.setAttribute('id', `search-username-${element.id}`)
-
-        const userButton = document.createElement('button');
-        userButton.innerHTML = 'Message';
-        userButton.setAttribute('id', `search-user-btn-${element.id}`);
-        userButton.setAttribute('class', 'search-user-btn btn');
-        userButton.addEventListener('click', () => redirectToChat(element.username));
-
-        userDiv.append(userParagraph, userButton);
+        const userDiv = createUserDiv(element);
         searchUsersDiv.append(userDiv);
     });
 
     searchInput.value = '';
+}
+
+async function displayGroups() {
+    const usersResponse = await fetch('http://127.0.0.1:8000/api/get-users');
+    const usersJson = await usersResponse.json();
+
+    const users = usersJson.users
+    const indexContent = document.getElementById('dm-content');
+
+    users.forEach(element => {
+        const userDiv = createUserDiv(element);
+        indexContent.append(userDiv);
+    });
+}
+
+function createUserDiv(element) {
+    const userDiv = document.createElement('div');
+    userDiv.setAttribute('class', 'search-user');
+    userDiv.setAttribute('id', `search-user-${element.id}`)
+
+    const userParagraph = document.createElement('p');
+    userParagraph.innerHTML = element.username;
+    userParagraph.setAttribute('class', 'search-username');
+    userParagraph.setAttribute('id', `search-username-${element.id}`)
+
+    const userButton = document.createElement('button');
+    userButton.innerHTML = 'Message';
+    userButton.setAttribute('id', `search-user-btn-${element.id}`);
+    userButton.setAttribute('class', 'search-user-btn btn');
+    userButton.addEventListener('click', () => redirectToChat(element.username));
+
+    userDiv.append(userParagraph, userButton);
+
+    return userDiv;
 }
 
 function getSearchParams(searchParamName) {

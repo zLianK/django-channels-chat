@@ -23,6 +23,14 @@ body {
   color: #008cff;
 }
 
+#index-content {
+  margin-top: 3em;
+}
+
+#dm-content {
+  width: 500px;
+}
+
 /* signup and login */
 .login-signup-bg {
   position: absolute;

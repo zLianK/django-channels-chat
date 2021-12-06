@@ -93,10 +93,14 @@ class UpdateGroup(APIView):
                 user_1=first_user, user_2=second_user)
             group.last_change = datetime
         except:
+
+            first_user_object = User.objects.get(id=first_user)
+            second_user_object = User.objects.get(id=second_user)
+
             group = ChatGroup(
-                user_1=first_user,
+                user_1=first_user_object,
                 status_user_1='e',
-                user_2=second_user,
+                user_2=second_user_object,
                 status_user_2='e',
                 last_change=datetime
             )
@@ -104,3 +108,31 @@ class UpdateGroup(APIView):
         group.save()
 
         return Response({'message': 'Successfully updated'})
+
+
+class GetUsers(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        current_user_id = request.user.id
+
+        queryset = {}
+        queryset['users'] = []
+
+        groups = ChatGroup.objects.filter(
+            user_1=current_user_id) | ChatGroup.objects.filter(user_2=current_user_id).order_by('-last_change')
+
+        for group in groups:
+            user_object = {}
+
+            if current_user_id == group.user_1.id:
+                user = User.objects.get(id=group.user_2.id)
+            else:
+                user = User.objects.get(id=group.user_1.id)
+
+            user_object["id"] = user.id
+            user_object["username"] = user.username
+
+            queryset['users'].append(user_object)
+
+        return Response(queryset)

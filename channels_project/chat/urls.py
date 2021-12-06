@@ -17,4 +17,5 @@ urlpatterns = [
     path('api/messages', api_views.GetMessages.as_view(), name='api-messages'),
     path('api/update-group', api_views.UpdateGroup.as_view(),
          name='api-update-group'),
+    path('api/get-users', api_views.GetUsers.as_view(), name='api-users'),
 ]
