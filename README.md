@@ -20,7 +20,7 @@ This is a simple real time chat application using Websocket, created as the fina
 By developing this final project, I've learned a lot of new things and technologies, started to think more logically and learned how to research and read documentations.  I've needed to think and plan all parts of this project by myself, and it was really good for my developing as a professional, now I can thought on how things work before start coding and plan it better. 
 
 ## Distinctiveness and Complexity
-The real time chat app that I've developed is different from the other projects because it uses another protocol instead of html to get it working. I decided to do this, because I've found out that there are more than the http protocol, so I've wanted to learn another one. 
+The real time chat app that I've developed is different from the other projects because it uses another protocol instead of http to get it working. I decided to do this, because I've found out that there are more than the http protocol, so I've wanted to learn another one. 
 
 Although this app is a simple application for the user, there is some complexity at coding it, because it uses a lot of technologies. It also uses APIs to link the frontend and the backend, the Websocket protocol to maintain a long connection between the client and server and Docker as the websocket "manager". 
 
@@ -37,7 +37,7 @@ All the chat application views that render a template are in this file. This is 
 The api and pages' routes are coded here.
 
 ### chat/models.py
-All the relational database models that I coded. I only used the User, ChatGroup and Message models yet.
+All the relational database models that I coded. I've only used the User, ChatGroup and Message models yet.
 
 ### chat/decorators.py
 This is where I coded the decorators that are kind of helpers used for check something before run the view.
@@ -61,7 +61,7 @@ This is the file where the websocket's routes are coded, for this project there 
 I've changed some configuration in this file, so that the app could use not only the http protocol, but also the websocket protocol.
 
 ### chat/static/chat/search.js
-This is the script of the index and search page. Here the dynamic rendering of the search function and the index page is coded
+This is the script of the index and search page. Here the dynamic rendering of the search function and the index page is coded.
 
 ### chat/static/chat/chat.js
 All the JavaScript for the chat page is coded here. The fetch request for the messages api helps rendering the messages at the screen.
