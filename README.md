@@ -85,3 +85,5 @@ Instead of coding directly Css, I coded Sass, because it has useful features tha
 4. Start the server
     - `python manage.py runserver`
 
+## Youtube Video
+[CS50w's Final Project Video](https://youtu.be/jkQjcxofjB8).  
