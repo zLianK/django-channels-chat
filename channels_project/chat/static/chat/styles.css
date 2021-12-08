@@ -177,6 +177,7 @@ body {
   font-weight: 700;
   font-size: 2.2em;
   margin: 10px;
+  margin-left: 0;
 }
 .chat-navbar-logo a {
   text-decoration: none;
@@ -388,7 +389,7 @@ body {
 }
 
 .messages-area {
-  height: 90%;
+  height: 80%;
   border-radius: 20px;
   padding: 20px;
   margin-bottom: 20px;
@@ -456,6 +457,78 @@ body {
   border-radius: 100px 100px 100px 0;
   background-color: #EBB6B5;
   color: #054161;
+}
+
+@media (max-width: 1200px) {
+  .login-signup-bg {
+    width: 95%;
+  }
+}
+@media (max-width: 900px) {
+  #chat-content {
+    width: 70%;
+  }
+}
+@media (max-width: 800px) {
+  #search-input {
+    width: 10em;
+  }
+
+  .chat-navbar {
+    column-gap: 3em;
+  }
+
+  .nav-current-user {
+    display: none;
+  }
+
+  .logout-btn {
+    border-radius: 5px;
+  }
+
+  .message-chat {
+    font-size: 1em;
+  }
+}
+@media (max-width: 600px) {
+  #dm-content, #search-content {
+    width: 300px;
+  }
+
+  .section-title {
+    text-align: center;
+  }
+
+  #chat-content {
+    width: 90%;
+    padding: 7px;
+  }
+}
+@media (max-width: 500px) {
+  .chat-navbar {
+    column-gap: 1em;
+  }
+
+  .chat-navbar-logo {
+    font-size: 2em;
+  }
+
+  .logout-btn, #search-input, .search-btn {
+    font-size: 0.9em;
+  }
+
+  #search-input {
+    width: 5em;
+  }
+
+  #dm-content, #search-content {
+    width: 250px;
+  }
+}
+@media (max-width: 400px) {
+  #chat-content {
+    width: 100%;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
